@@ -1,79 +1,39 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import React from 'react';
-import { Link } from 'expo-router';
+import { View, Text } from "react-native";
+import React from "react";
 
 const Index = () => {
   return (
     <View
       style={{
-        backgroundColor: '#000',
         flex: 1,
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#0f172a",
+        padding: 24,
       }}
     >
       <Text
         style={{
-          color: '#fff',
-          fontSize: 28,
-          fontWeight: 'bold',
+          fontSize: 44,
+          fontWeight: "bold",
+          color: "#38bdf8",
           marginBottom: 20,
         }}
       >
-        Welcome
+        🚀 Welcome
       </Text>
 
-      {/* Styled Button to /profile */}
-      <Link href="/profile" asChild>
-        <TouchableOpacity
-          style={{
-            backgroundColor: '#1e90ff',
-            paddingVertical: 12,
-            paddingHorizontal: 30,
-            borderRadius: 8,
-            marginVertical: 10,
-          }}
-        >
-          <Text style={{ color: '#fff', fontSize: 18, fontWeight: '600' }}>
-            Go to Profile
-          </Text>
-        </TouchableOpacity>
-      </Link>
-
-      {/* Styled Button to /user */}
-      <Link href="/user" asChild>
-        <TouchableOpacity
-          style={{
-            backgroundColor: '#32cd32',
-            paddingVertical: 12,
-            paddingHorizontal: 30,
-            borderRadius: 8,
-            marginVertical: 10,
-          }}
-        >
-          <Text style={{ color: '#fff', fontSize: 18, fontWeight: '600' }}>
-            Go to User
-          </Text>
-        </TouchableOpacity>
-      </Link>
-
-      {/* TextInput with styling */}
-      <TextInput
-        placeholder="Enter your name"
-        placeholderTextColor="#888"
+      <Text
         style={{
-          borderWidth: 1,
-          borderColor: '#fff',
-          color: '#fff',
-          padding: 10,
-          marginTop: 30,
-          width: '100%',
-          borderRadius: 8,
-          fontSize: 16,
+          fontSize: 18,
+          color: "#cbd5e1",
+          textAlign: "center",
+          maxWidth: 320,
+          lineHeight: 26,
         }}
-      />
+      >
+        Explore the navigation tabs below to discover more features and pages.
+      </Text>
     </View>
   );
 };
