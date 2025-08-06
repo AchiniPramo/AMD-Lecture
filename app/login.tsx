@@ -1,17 +1,21 @@
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
+import { useAuth } from "@/context/AuthContext";
 
 const LoginScreen = () => {
+  const { login } = useAuth();
   const router = useRouter();
-  const [email, setEmail] = useState("");
+
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    if (email && password) {
-      router.replace("/");
+    if (username === "admin" && password === "1234") {
+      login();
+      router.replace("/"); // redirect to home page
     } else {
-      alert("Please fill both fields");
+      alert("Invalid credentials!");
     }
   };
 
@@ -19,7 +23,7 @@ const LoginScreen = () => {
     <View
       style={{
         flex: 1,
-        backgroundColor: "#0f172a", // dark background
+        backgroundColor: "#0f172a",
         justifyContent: "center",
         alignItems: "center",
         padding: 20,
@@ -54,7 +58,7 @@ const LoginScreen = () => {
         }}
       >
         <TextInput
-          placeholder="Email"
+          placeholder="Username"
           placeholderTextColor="#94a3b8"
           style={{
             backgroundColor: "#334155",
@@ -64,9 +68,9 @@ const LoginScreen = () => {
             marginBottom: 20,
             fontSize: 15,
           }}
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
+          value={username}
+          onChangeText={setUsername}
+          autoCapitalize="none"
         />
 
         <TextInput
@@ -95,7 +99,13 @@ const LoginScreen = () => {
             marginTop: 15,
           }}
         >
-          <Text style={{ color: "#0f172a", fontSize: 16, fontWeight: "bold" }}>
+          <Text
+            style={{
+              color: "#0f172a",
+              fontSize: 16,
+              fontWeight: "bold",
+            }}
+          >
             Login
           </Text>
         </TouchableOpacity>
@@ -103,7 +113,12 @@ const LoginScreen = () => {
 
       <Text style={{ color: "#94a3b8", marginTop: 30 }}>
         Don’t have an account?{" "}
-        <Text style={{ color: "#38bdf8", fontWeight: "600" }}>Sign up</Text>
+        <Text
+          style={{ color: "#38bdf8", fontWeight: "600" }}
+          onPress={() => router.push("/")}
+        >
+          Sign up
+        </Text>
       </Text>
     </View>
   );

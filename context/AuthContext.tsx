@@ -1,12 +1,23 @@
-import { createContext } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
-const AuthContext = createContext(undefined);
+const AuthContext = createContext<any>(undefined);
 
 
-const AuthProvider = () => {
+export const AuthProvider = ({children} : {children:ReactNode}) => {
+    const [isUser, setIsUser] = useState(false);
+
+    const login = () => setIsUser(true)
+    const logout = () => setIsUser(false)
+
+
   return (
-    
+    <AuthContext.Provider value={{isUser, login, logout}}>
+      {children}
+    </AuthContext.Provider>
   )
 }
 
-export default AuthContext
+export const useAuth = () => {
+  return useContext(AuthContext);
+  
+}
