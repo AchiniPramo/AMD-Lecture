@@ -1,34 +1,33 @@
 import { View, Text, Pressable, Dimensions } from "react-native";
 import React from "react";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
-const NavButton = ({ label, href }: { label: string; href: string }) => {
+const NavButton = ({ label, onPress }: { label: string; onPress: () => void }) => {
   const screenWidth = Dimensions.get("window").width;
-  const buttonWidth = screenWidth / 4 - 16; // divide evenly with spacing
+  const buttonWidth = screenWidth / 5 - 16; // Now 5 buttons
 
   return (
-    <Link href={href} asChild>
-      <Pressable
+    <Pressable
+      onPress={onPress}
+      style={{
+        width: buttonWidth,
+        backgroundColor: "#3498db",
+        paddingVertical: 8,
+        borderRadius: 10,
+        alignItems: "center",
+      }}
+      android_ripple={{ color: "#2980b9" }}
+    >
+      <Text
         style={{
-          width: buttonWidth,
-          backgroundColor: "#3498db",
-          paddingVertical: 8,
-          borderRadius: 10,
-          alignItems: "center",
+          color: "#fff",
+          fontWeight: "600",
+          fontSize: 14,
         }}
-        android_ripple={{ color: "#2980b9" }}
       >
-        <Text
-          style={{
-            color: "#fff",
-            fontWeight: "600",
-            fontSize: 14,
-          }}
-        >
-          {label}
-        </Text>
-      </Pressable>
-    </Link>
+        {label}
+      </Text>
+    </Pressable>
   );
 };
 
@@ -51,11 +50,24 @@ const FooterNav = () => {
         gap: 8,
       }}
     >
-      {/* Nav Buttons */}
-      <NavButton label="Home" href="/" />
-      <NavButton label="Profile" href="/profile" />
-      <NavButton label="User" href="/user" />
-      <NavButton label="Login" href="/login" />
+      <NavButton label="Home" onPress={() => router.push("/")} />
+      <NavButton label="Profile" onPress={() => router.push("/profile")} />
+      <NavButton label="User" onPress={() => router.push("/user")} />
+      <NavButton
+        label="Item"
+        onPress={() =>
+          router.push({
+            pathname: "/item/[id]",
+            params: {
+              id: "1",
+              name: "kavi",
+              age: "29",
+              address: "galle",
+            },
+          })
+        }
+      />
+      <NavButton label="Login" onPress={() => router.push("/login")} />
     </View>
   );
 };
